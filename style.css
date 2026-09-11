@@ -3,15 +3,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #1a1a1a;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #container {
     position: relative;
-    width: 640px; 
-    height: 640px;
+    width: 100%;
+    max-width: 640px; 
+    aspect-ratio: 1 / 1; 
     background-image: url('background.jpg'); 
     background-size: cover;
     background-position: center;
@@ -20,35 +21,33 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* עיצוב הכותרת העליונה החדשה */
 #top-instruction {
     position: absolute;
-    top: 30px;
+    top: 5%;
     width: 100%;
     text-align: center;
-    color: white;
+    color: black; /* שונה לשחור */
     font-size: 26px;
     font-weight: bold;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 6px rgba(255,255,255,0.9); /* הילה לבנה לקריאות */
     z-index: 10;
-    transition: opacity 0.5s ease-out; /* אנימציית העלמה */
+    transition: opacity 0.5s ease-out;
 }
 
 #launch-btn-wrapper {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
+    bottom: 5%;
+    right: 5%;
     text-align: center;
     z-index: 10;
 }
 
-/* התאמתי קצת את גודל הפונט כדי שהמשפט הארוך יותר ייכנס יפה */
 .btn-label {
-    color: white;
+    color: black; /* שונה לשחור */
     font-size: 16px; 
     font-weight: bold;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    text-shadow: 1px 1px 4px rgba(255,255,255,0.9);
 }
 
 #launch-btn {
@@ -60,7 +59,7 @@ body {
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0,0,0,0.5), inset 0 -5px 15px rgba(0,0,0,0.3);
     transition: transform 0.1s, box-shadow 0.1s;
-    margin: 0 auto; /* מרכוז הכפתור ביחס לטקסט מעליו */
+    margin: 0 auto;
 }
 
 #launch-btn:active {
@@ -70,9 +69,9 @@ body {
 
 #missile {
     position: absolute;
-    top: 250px; 
-    left: 200px;
-    width: 150px;
+    top: 39%; 
+    left: 31%;
+    width: 23%;
     height: auto;
     opacity: 0;
     z-index: 5;
@@ -89,30 +88,49 @@ body {
 
 #target-window {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 250px;
+    top: 3%;
+    right: 3%;
+    width: 39%; 
     opacity: 0;
     z-index: 8;
     border: 2px solid rgba(255, 255, 255, 0.5);
     transition: opacity 0.5s ease-in;
 }
 
-/* עיצוב מעודכן לטקסט הברכה */
 #blessing-text {
     position: absolute;
-    bottom: 30px;
-    left: 30px;
-    color: white;
+    bottom: 5%;
+    left: 5%;
+    color: black; /* שונה לשחור */
     opacity: 0;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+    text-shadow: 2px 2px 6px rgba(255,255,255,0.9);
     transition: opacity 1s ease-in;
     z-index: 9;
 }
 
-#blessing-text h3 { margin: 0 0 5px 0; font-size: 26px; color: #ffeb3b; } /* הוספתי צבע צהבהב לצוות NLOS כדי שיבלוט */
+#blessing-text h3 { margin: 0 0 5px 0; font-size: 26px; color: black; }
+.red-text { color: #d32f2f; } /* מחלקה חדשה לצבע האדום */
 #blessing-text h1 { margin: 0; font-size: 40px; }
 #blessing-text h2 { margin: 5px 0 0 0; font-size: 22px; font-weight: normal; }
 
 .show { opacity: 1 !important; }
-.hide { opacity: 0 !important; } /* קלאס חדש להסתרת הכותרת */
+.hide { opacity: 0 !important; }
+
+/* התאמה למובייל */
+@media (max-width: 640px) {
+    #container { border-radius: 0; }
+    #top-instruction { font-size: 5vw; top: 6vw; }
+    #launch-btn-wrapper { bottom: 6vw; right: 6vw; }
+    #launch-btn { width: 18vw; height: 18vw; border-width: 3px; }
+    .btn-label { font-size: 3.5vw !important; margin-bottom: 2vw; padding: 1vw 2vw !important; }
+    #blessing-text { bottom: 6vw; left: 6vw; }
+    #blessing-text h3 { font-size: 4.5vw; margin-bottom: 1vw; }
+    #blessing-text h1 { font-size: 7vw; }
+    #blessing-text h2 { font-size: 4vw; margin-top: 1vw; }
+    .fire-missile { animation: fly-mobile 1.5s cubic-bezier(0.4, 0, 1, 1) forwards; }
+}
+
+@keyframes fly-mobile {
+    0% { transform: translate(0, 0) rotate(-15deg) scale(1); opacity: 1; }
+    100% { transform: translate(45vw, -30vw) rotate(-15deg) scale(0.5); opacity: 0; }
+}
